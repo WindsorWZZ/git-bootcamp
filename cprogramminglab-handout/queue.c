@@ -71,7 +71,7 @@ bool q_insert_head(queue_t *q, char *s)
     newh = (list_ele_t*)malloc(sizeof(list_ele_t));
     if(newh==NULL) return false;
 
-    newh->value = (char*)malloc(sizeof(s));
+    newh->value = (char*)malloc(strlen(s)+1);
     if(newh->value == NULL)
 	{
 	   free(newh);
@@ -110,7 +110,7 @@ bool q_insert_tail(queue_t *q, char *s)
     if(newt)
     	{
 
-		 newt->value = (char*)malloc(sizeof(s));
+		 newt->value = (char*)malloc(strlen(s)+1);
 		 if(newt->value)
 		 {
 		   newt->next = NULL;
@@ -147,7 +147,7 @@ bool q_remove_head(queue_t *q, char *sp, size_t bufsize)
     q->head = q->head->next;
     if(sp)
     {
-	    if( strlen(del->value) > bufsize )
+	    if( strlen(del->value) >= bufsize )
 		    del->value[bufsize-1] = '\0';
 	    strcpy( sp, del->value );
     }
