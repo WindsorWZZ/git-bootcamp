@@ -104,17 +104,18 @@ bool q_insert_tail(queue_t *q, char *s)
     list_ele_t *newt;
     if(q)
     {
-	if( q->tail == q->head ) return q_insert_head(q, s);
+	if( q->tail == NULL ) return q_insert_head(q, s);
         newt = (list_ele_t*)malloc(sizeof(list_ele_t));
 
     if(newt)
     	{
-		 newt->next = NULL;
-		 q->tail->next = newt;
-		 q->tail = newt;
+
 		 newt->value = (char*)malloc(sizeof(s));
 		 if(newt->value)
 		 {
+		   newt->next = NULL;
+		   q->tail->next = newt;
+		   q->tail = newt;
 		   strcpy( newt->value, s );
 		   q->num += 1;
 		   return true;
